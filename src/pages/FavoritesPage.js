@@ -10,7 +10,7 @@ function FavoritesPage() {
     if(favoritesCtx.totalFavorites === 0){
         content = <p> you got no favorites</p>
     }else{
-        <MeetupList meetups={favoritesCtx.favorites} />
+     content= <MeetupList meetups={favoritesCtx.favorites} />
     }
 
 

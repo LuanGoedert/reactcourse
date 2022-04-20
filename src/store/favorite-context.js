@@ -1,45 +1,45 @@
-import { createContext, useState } from 'react';
+import { createContext, useState } from "react";
 
-const FavoritesContext = createContext({
-  favorites: [],
-  totalFavorites: 0,
-  addFavorite: (favoriteMeetup) => {},
-  removeFavorite: (meetupId) => {},
-  itemIsFavorite: (meetupId) => {}
+const  FavoritesContext = createContext({
+    favorites: [],
+    totalFavorites: 0,
+    addFavorite:(favoriteMeetup) => {},
+    removeFavorite:(meetupId) => {},
+    itemIsfavorite:(meetupId) => {}
+
 });
 
-export function FavoritesContextProvider(props) {
-  const [userFavorites, setUserFavorites] = useState([]);
+export function FavoritesContextProvider(props){
+   const [userfavorites, setUserFavorites] =  useState([]);
 
-  function addFavoriteHandler(favoriteMeetup) {
-    setUserFavorites((prevUserFavorites) => {
-      return prevUserFavorites.concat(favoriteMeetup);
+   function addFavoriteHandler(favoriteMeetup){
+    setUserFavorites((previousUserFavorites) => {
+        return previousUserFavorites.concat(favoriteMeetup)
     });
-  }
+   }
 
-  function removeFavoriteHandler(meetupId) {
-    setUserFavorites(prevUserFavorites => {
-      return prevUserFavorites.filter(meetup => meetup.id !== meetupId);
-    });
-  }
+   function removeFavoriteHandler(meetupId){
+    setUserFavorites(previousUserFavorites => {
+       return previousUserFavorites.filter(meetup => meetup.meetupId !== meetupId)
+    })
+   }
 
-  function itemIsFavoriteHandler(meetupId) {
-    return userFavorites.some(meetup => meetup.id === meetupId);
-  }
+   function itemIsFavoriteHandler(meetupId){
+    return userfavorites.some(meetup => meetup.meetupId === meetupId);
+   }
 
-  const context = {
-    favorites: userFavorites,
-    totalFavorites: userFavorites.length,
-    addFavorite: addFavoriteHandler,
-    removeFavorite: removeFavoriteHandler,
-    itemIsFavorite: itemIsFavoriteHandler
-  };
+    const context = {
+        favorites: userfavorites,
+        totalFavorites: userfavorites.length,
+        addFavorite: addFavoriteHandler,
+        removeFavorite: removeFavoriteHandler,
+        itemIsFavorite: itemIsFavoriteHandler
+    };    
 
-  return (
-    <FavoritesContext.Provider value={context}>
-      {props.children}
+    return <FavoritesContext.Provider value={context}>
+        {props.children}
     </FavoritesContext.Provider>
-  );
 }
+
 
 export default FavoritesContext;
